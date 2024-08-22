@@ -1,9 +1,9 @@
-package med.voll.api.endereco;
+package med.voll.api.dtos;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 
-public record DadosEndereco(
+public record DadosCadastroEndereco(
 		@NotBlank 
 		String logradouro,
 		
@@ -19,6 +19,8 @@ public record DadosEndereco(
 		
 		@NotBlank 
 		String uf,
-		String complemento, String numero) {
+		
+		String complemento,
+		String numero) {
 
 }
