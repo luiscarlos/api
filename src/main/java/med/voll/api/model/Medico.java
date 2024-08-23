@@ -33,6 +33,7 @@ public class Medico {
 	private String email;
 	private String telefone;
 	private String crm;
+	private Boolean ativo;
 
 	@Enumerated(EnumType.STRING)
 	private Especialidade especialidade;
@@ -45,6 +46,7 @@ public class Medico {
 		this.email = dados.email();
 		this.telefone = dados.telefone();
 		this.crm = dados.crm();
+		this.ativo = true;
 		this.especialidade = dados.especialidade();
 		this.endereco = new Endereco(dados.endereco());
 	}
@@ -65,7 +67,7 @@ public class Medico {
 	 * @param especialidade
 	 * @param endereco
 	 */
-	public Medico(Long id, String nome, String email, String telefone, String crm, Especialidade especialidade,
+	public Medico(Long id, String nome, String email, String telefone, String crm, Boolean ativo, Especialidade especialidade,
 			Endereco endereco) {
 		super();
 		this.id = id;
@@ -75,6 +77,15 @@ public class Medico {
 		this.crm = crm;
 		this.especialidade = especialidade;
 		this.endereco = endereco;
+	}
+	
+	
+	public Boolean getAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(Boolean ativo) {
+		this.ativo = ativo;
 	}
 
 	public Long getId() {
@@ -146,8 +157,8 @@ public class Medico {
 
     }
 
-	
-	
-	
+	public void excluir() {
+		this.ativo = false;
+	}
 
 }

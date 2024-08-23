@@ -23,6 +23,9 @@ public record DadosCadastroMedico(
 		String crm, 
 		
 		@NotNull
+        Boolean ativo,
+		
+		@NotNull
 		Especialidade especialidade, 
 		
 		@NotNull

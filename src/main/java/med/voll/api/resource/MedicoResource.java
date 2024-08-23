@@ -46,9 +46,9 @@ public class MedicoResource {
 	  }*/
 	  
 	  @GetMapping
-	    public Page<DadosListagemMedico> listar(@PageableDefault(size = 10, sort = {"nome"}) Pageable paginacao) {
-	        return medicoRepository.findAll(paginacao).map(DadosListagemMedico::new);
-	  }
+	  public Page<DadosListagemMedico> listar(@PageableDefault(size = 10, sort = {"nome"}) Pageable paginacao) {
+	        return medicoRepository.findAllByAtivoTrue(paginacao).map(DadosListagemMedico::new);
+	    }
 	  
 	  @PutMapping
 	  @Transactional
@@ -60,6 +60,7 @@ public class MedicoResource {
 	  @DeleteMapping("/{id}")
 	  @Transactional
 	  public void deletar(@PathVariable Long id ) {
-		  medicoRepository.deleteById(id);  
+		  var medico = medicoRepository.getReferenceById(id); 
+		  medico.excluir();
 	  }
 }
