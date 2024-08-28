@@ -19,7 +19,6 @@ public record DadosCadastroEndereco(
 		
 		@NotBlank 
 		String uf,
-		
 		String complemento,
 		String numero) {
 

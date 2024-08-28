@@ -41,19 +41,7 @@ public class Medico {
 	@Embedded
 	private Endereco endereco;
 
-	public Medico(DadosCadastroMedico dados) {
-		this.nome = dados.nome();
-		this.email = dados.email();
-		this.telefone = dados.telefone();
-		this.crm = dados.crm();
-		this.ativo = true;
-		this.especialidade = dados.especialidade();
-		this.endereco = new Endereco(dados.endereco());
-	}
 
-	/**
-	 * 
-	 */
 	public Medico() {
 		super();
 	}
@@ -77,6 +65,16 @@ public class Medico {
 		this.crm = crm;
 		this.especialidade = especialidade;
 		this.endereco = endereco;
+	}
+	
+	public Medico(DadosCadastroMedico dados) {
+		super();
+		this.nome = dados.nome();
+		this.email = dados.email();
+		this.telefone = dados.telefone();
+		this.crm = dados.crm();
+		this.especialidade = dados.especialidade();
+		this.endereco = new Endereco(dados.endereco());
 	}
 	
 	
