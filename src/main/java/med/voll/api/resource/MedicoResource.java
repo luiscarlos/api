@@ -1,5 +1,7 @@
 package med.voll.api.resource;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -43,23 +45,30 @@ public class MedicoResource {
 		return ResponseEntity.created(uri).body(new DadosDetalhamentoMedico(medico));
 	}
 
+	
+	/* @GetMapping public List<DadosListagemMedico> listar(){
+	  
+	  return
+	  medicoRepository.findAll().stream().map(DadosListagemMedico::new).toList(); }
+	 
+   */
 	/*
-	 * @GetMapping public List<DadosListagemMedico> listar(){
-	 * 
-	 * return
-	 * medicoRepository.findAll().stream().map(DadosListagemMedico::new).toList(); }
-	 */
-
+	
 	@GetMapping
-	public ResponseEntity<Page<DadosListagemMedico>> listar(
-			@PageableDefault(size = 10, sort = { "nome" }) Pageable paginacao) {
+    public Page<DadosListagemMedico> listar(Pageable paginacao) {
+        return medicoRepository.findAll(paginacao).map(DadosListagemMedico::new);
+    }*/
+	
+	@GetMapping
+	public ResponseEntity<Page<DadosListagemMedico>> listar(@PageableDefault(size = 10, page =0, sort = { "nome" }) Pageable paginacao) {
 		var page = medicoRepository.findAllByAtivoTrue(paginacao).map(DadosListagemMedico::new);
 		return ResponseEntity.ok(page);
 	}
+	
 
 	@PutMapping
 	@Transactional
-	public ResponseEntity atualizar(@RequestBody @Valid DadosAtualizacaoMedico dados) {
+	public ResponseEntity<Object> atualizar(@RequestBody @Valid DadosAtualizacaoMedico dados) {
 		var medico = medicoRepository.getReferenceById(dados.id());
 		medico.atualizarInformacoes(dados);
 		return ResponseEntity.ok(new DadosDetalhamentoMedico(medico));
@@ -79,4 +88,5 @@ public class MedicoResource {
 		var medico = medicoRepository.getReferenceById(id);
 		return ResponseEntity.ok(new DadosDetalhamentoMedico(medico));
 	}
+	
 }
