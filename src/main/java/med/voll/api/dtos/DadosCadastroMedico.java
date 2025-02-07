@@ -8,18 +8,18 @@ import jakarta.validation.constraints.Pattern;
 import med.voll.api.model.enums.Especialidade;
 
 public record DadosCadastroMedico(
-		@NotBlank
+		@NotBlank(message = "Nome é obrigatório")
 		String nome,
 		
-		@NotBlank
-		@Email
+		@NotBlank(message = "Email é obrigatório")
+	    @Email(message = "Formato do email é inválido")
 		String email, 
 		
 		@NotBlank
 		String telefone,
 		
-		@NotBlank
-		@Pattern(regexp = "\\d{4,6}")
+		@NotBlank(message = "{crm.obrigatorio}")
+	    @Pattern(regexp = "\\d{4,6}", message = "Formato do CRM é inválido")
 		String crm, 
 		
 		@NotNull
