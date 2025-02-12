@@ -11,6 +11,11 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 
+/*@Getter
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode(of = "id")
+*/
 @Table(name = "usuarios")
 @Entity(name = "Usuario")
 public class Usuario {
