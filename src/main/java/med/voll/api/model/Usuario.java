@@ -1,5 +1,7 @@
 package med.voll.api.model;
 import jakarta.persistence.*;
+import med.voll.api.model.enums.UserRole;
+
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -28,10 +30,12 @@ public class Usuario implements UserDetails{
 	    private Long id;
 	    private String login;
 	    private String senha;
+	   // private UserRole role;
 	
 	
 	public Usuario() {
 		super();
+		
 	}
 	
 
@@ -40,8 +44,17 @@ public class Usuario implements UserDetails{
 		this.id = id;
 		this.login = login;
 		this.senha = senha;
+		//this.role = role;
+		
 	}
 
+	public Usuario( String login, String senha, UserRole role) {
+		super();
+		this.login = login;
+		this.senha = senha;
+		//this.role = role;
+		
+	}
 
 	public Long getId() {
 		return id;
@@ -61,7 +74,18 @@ public class Usuario implements UserDetails{
 	public void setSenha(String senha) {
 		senha = senha;
 	}
+	
 
+/*
+	public UserRole getRole() {
+		return role;
+	}
+
+
+	public void setRole(UserRole role) {
+		this.role = role;
+	}
+*/
 
 	@Override
 	public int hashCode() {
@@ -82,10 +106,16 @@ public class Usuario implements UserDetails{
 	}
 
 
-	@Override
-	public Collection<? extends GrantedAuthority> getAuthorities() {
-		return List.of(new SimpleGrantedAuthority("ROLE_USER"));
-	}
+	  /* @Override
+	    public Collection<? extends GrantedAuthority> getAuthorities() {
+	        if(this.role == UserRole.ADMIN) return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"), new SimpleGrantedAuthority("ROLE_USER"));
+	        else return List.of(new SimpleGrantedAuthority("ROLE_USER"));
+	    }*/
+	   
+	   @Override
+	    public Collection<? extends GrantedAuthority> getAuthorities() {
+		   return List.of(new SimpleGrantedAuthority("ROLE_USER"));
+	    }
 
 
    
